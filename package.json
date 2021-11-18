@@ -1,0 +1,33 @@
+{
+  "name": "react-animation-maker",
+  "version": "1.1.0",
+  "description": "A package for making it easier to create animations in ReactJS apps.",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "reactjs",
+    "animation",
+    "front-end development"
+  ],
+  "author": "MahmoudEhab <mo.ehab150@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-react": "^7.16.0",
+    "@rollup/plugin-node-resolve": "^13.0.6",
+    "babel-loader": "^8.2.3",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.60.0",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4"
+  },
+  "peerDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
