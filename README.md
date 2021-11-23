@@ -52,3 +52,6 @@ to={FancyPopIn.to}>
     Hello, World!
 </Animate>
 ```
+
+Checkout the whole list here:
+[https://mahmoud-ehab.github.io/react-animation-maker](https://mahmoud-ehab.github.io/react-animation-maker)

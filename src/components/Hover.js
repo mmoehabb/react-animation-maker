@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import propTypes from 'prop-types';
 
-const Hover = (props) => {
+export const Hover = (props) => {
     const style = props.defaultStyle || {backgroundColor: '#00000000'};
     const hover = props.hoverStyle || {backgroundColor: '#00000066'};
 

@@ -1,2 +1,2 @@
 export * from './Animate';
-export * from './FancyPopIn';
+export * from './Animations';

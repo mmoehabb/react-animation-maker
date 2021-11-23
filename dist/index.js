@@ -67,6 +67,123 @@ Animate.propTypes = {
   loop: PropTypes__default["default"].bool
 };
 
+// Fade Animations
+const FadeIn = {
+  from: {
+    opacity: 0
+  },
+  to: [{
+    opacity: 1
+  }]
+};
+const FadeOut = {
+  from: {
+    opacity: 1
+  },
+  to: [{
+    opacity: 0
+  }]
+}; // Slide Animations
+
+const SlideInTop = {
+  from: {
+    transform: 'translate(0, -200%)'
+  },
+  to: [{
+    transform: 'translate(0, 0)'
+  }]
+};
+const SlideOutTop = {
+  from: {
+    transform: 'translate(0, 0)'
+  },
+  to: [{
+    transform: 'translate(0, -200%)'
+  }]
+};
+const SlideInRight = {
+  from: {
+    transform: 'translate(-200%, 0)'
+  },
+  to: [{
+    transform: 'translate(0, 0)'
+  }]
+};
+const SlideOutRight = {
+  from: {
+    transform: 'translate(0, 0)'
+  },
+  to: [{
+    transform: 'translate(-200%, 0)'
+  }]
+};
+const SlideInDown = {
+  from: {
+    transform: 'translate(0, 200%)'
+  },
+  to: [{
+    transform: 'translate(0, 0)'
+  }]
+};
+const SlideOutDown = {
+  from: {
+    transform: 'translate(0, 0)'
+  },
+  to: [{
+    transform: 'translate(0, 200%)'
+  }]
+};
+const SlideInLeft = {
+  from: {
+    transform: 'translate(200%, 0)'
+  },
+  to: [{
+    transform: 'translate(0, 0)'
+  }]
+};
+const SlideOutLeft = {
+  from: {
+    transform: 'translate(0, 0)'
+  },
+  to: [{
+    transform: 'translate(200%, 0)'
+  }]
+}; // Zoom Animations
+
+const ZoomIn = {
+  from: {
+    scale: 0
+  },
+  to: [{}]
+};
+const ZoomOut = {
+  from: {},
+  to: [{
+    scale: 0
+  }]
+}; // Bounce Animations
+
+const BounceIn = {
+  from: {
+    scale: '0'
+  },
+  to: [{
+    scale: '1.15'
+  }, {
+    scale: '1'
+  }]
+};
+const BounceOut = {
+  from: {
+    scale: '1'
+  },
+  to: [{
+    scale: '1.2'
+  }, {
+    scale: '0'
+  }]
+}; // Other
+
 const FancyPopIn = {
   from: {
     transform: 'rotate(20deg)',
@@ -80,4 +197,18 @@ const FancyPopIn = {
 };
 
 exports.Animate = Animate;
+exports.BounceIn = BounceIn;
+exports.BounceOut = BounceOut;
+exports.FadeIn = FadeIn;
+exports.FadeOut = FadeOut;
 exports.FancyPopIn = FancyPopIn;
+exports.SlideInDown = SlideInDown;
+exports.SlideInLeft = SlideInLeft;
+exports.SlideInRight = SlideInRight;
+exports.SlideInTop = SlideInTop;
+exports.SlideOutDown = SlideOutDown;
+exports.SlideOutLeft = SlideOutLeft;
+exports.SlideOutRight = SlideOutRight;
+exports.SlideOutTop = SlideOutTop;
+exports.ZoomIn = ZoomIn;
+exports.ZoomOut = ZoomOut;
