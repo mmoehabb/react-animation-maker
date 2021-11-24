@@ -18,21 +18,33 @@ export const Animate = props => {
     // Hooks
     const [style, setStyle] = useState(props.from);
     const [firstRender, setFirstRender] = useState(true);
+    const [duration, setDuration] = useState(props.durations ? props.durations[0] : '1s');
 
     // Changing style repeatedly logic
     const updateStyle = () => {
     	function update_func() {
-        	const init_dur = durFromString(props.duration || '1s');
+            const durs = props.durations.map((dur) => durFromString(dur));
+            let dur = 0;
+
             for (let i = 0; i < props.to.length; i++) {
-                const dur = i * init_dur;
-                setTimeout(() => setStyle(props.to[i]), dur);
+                // if the user inputed a convenient list of durations
+                if (props.durations && props.durations.length === props.to.length) {
+                    setTimeout(() => setStyle(props.to[i]), dur);
+                    setTimeout(() => setDuration(props.durations[i]), dur);
+                    dur += durs[i];
+                }
+                // Otherwise
+                else {
+                    dur = durs[0] * i;                    
+                    setTimeout(() => setStyle(props.to[i]), dur);
+                }
 
                 // For looping purpose
                 if (props.loop && i === props.to.length-1) {
-                	setTimeout(() => setStyle(props.from), dur + init_dur);
-                    setTimeout(update_func, dur + init_dur*2);
-                } 
-            } 
+                	setTimeout(() => setStyle(props.from), dur);
+                    setTimeout(update_func, dur + durs[0]);
+                }
+            }   
         }
         setTimeout(update_func, props.delay || 100);
     }
@@ -45,7 +57,7 @@ export const Animate = props => {
 
     // JSX
     return (
-        <div style={{...props.style, ...style, transition: props.duration || '1s'}}>
+        <div style={{...props.style, ...style, transition: duration}}>
             {props.children}
         </div>
     );
@@ -57,6 +69,6 @@ Animate.propTypes = {
 
     style: PropTypes.object,
     delay: PropTypes.number,
-    duration: PropTypes.string,
+    durations: PropTypes.arrayOf(PropTypes.string),
     loop: PropTypes.bool,
 };

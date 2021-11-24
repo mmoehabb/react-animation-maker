@@ -14,19 +14,30 @@ const durFromString = s => {
 const Animate = props => {
   // Hooks
   const [style, setStyle] = useState(props.from);
-  const [firstRender, setFirstRender] = useState(true); // Changing style repeatedly logic
+  const [firstRender, setFirstRender] = useState(true);
+  const [duration, setDuration] = useState(props.durations ? props.durations[0] : '1s'); // Changing style repeatedly logic
 
   const updateStyle = () => {
     function update_func() {
-      const init_dur = durFromString(props.duration || '1s');
+      const durs = props.durations.map(dur => durFromString(dur));
+      let dur = 0;
 
       for (let i = 0; i < props.to.length; i++) {
-        const dur = i * init_dur;
-        setTimeout(() => setStyle(props.to[i]), dur); // For looping purpose
+        // if the user inputed a convenient list of durations
+        if (props.durations && props.durations.length === props.to.length) {
+          setTimeout(() => setStyle(props.to[i]), dur);
+          setTimeout(() => setDuration(props.durations[i]), dur);
+          dur += durs[i];
+        } // Otherwise
+        else {
+          dur = durs[0] * i;
+          setTimeout(() => setStyle(props.to[i]), dur);
+        } // For looping purpose
+
 
         if (props.loop && i === props.to.length - 1) {
-          setTimeout(() => setStyle(props.from), dur + init_dur);
-          setTimeout(update_func, dur + init_dur * 2);
+          setTimeout(() => setStyle(props.from), dur);
+          setTimeout(update_func, dur + durs[0]);
         }
       }
     }
@@ -44,7 +55,7 @@ const Animate = props => {
   return /*#__PURE__*/React.createElement("div", {
     style: { ...props.style,
       ...style,
-      transition: props.duration || '1s'
+      transition: duration
     }
   }, props.children);
 }; // PropTypes
@@ -54,7 +65,7 @@ Animate.propTypes = {
   to: PropTypes.arrayOf(PropTypes.object).isRequired,
   style: PropTypes.object,
   delay: PropTypes.number,
-  duration: PropTypes.string,
+  durations: PropTypes.arrayOf(PropTypes.string),
   loop: PropTypes.bool
 };
 
@@ -65,7 +76,8 @@ const FadeIn = {
   },
   to: [{
     opacity: 1
-  }]
+  }],
+  durations: ['1s']
 };
 const FadeOut = {
   from: {
@@ -73,7 +85,8 @@ const FadeOut = {
   },
   to: [{
     opacity: 0
-  }]
+  }],
+  durations: ['1s']
 }; // Slide Animations
 
 const SlideInTop = {
@@ -82,7 +95,8 @@ const SlideInTop = {
   },
   to: [{
     transform: 'translate(0, 0)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideOutTop = {
   from: {
@@ -90,7 +104,8 @@ const SlideOutTop = {
   },
   to: [{
     transform: 'translate(0, -200%)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideInRight = {
   from: {
@@ -98,7 +113,8 @@ const SlideInRight = {
   },
   to: [{
     transform: 'translate(0, 0)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideOutRight = {
   from: {
@@ -106,7 +122,8 @@ const SlideOutRight = {
   },
   to: [{
     transform: 'translate(-200%, 0)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideInDown = {
   from: {
@@ -114,7 +131,8 @@ const SlideInDown = {
   },
   to: [{
     transform: 'translate(0, 0)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideOutDown = {
   from: {
@@ -122,7 +140,8 @@ const SlideOutDown = {
   },
   to: [{
     transform: 'translate(0, 200%)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideInLeft = {
   from: {
@@ -130,7 +149,8 @@ const SlideInLeft = {
   },
   to: [{
     transform: 'translate(0, 0)'
-  }]
+  }],
+  durations: ['1s']
 };
 const SlideOutLeft = {
   from: {
@@ -138,41 +158,55 @@ const SlideOutLeft = {
   },
   to: [{
     transform: 'translate(200%, 0)'
-  }]
+  }],
+  durations: ['1s']
 }; // Zoom Animations
 
 const ZoomIn = {
   from: {
     transform: 'scale(0)'
   },
-  to: [{}]
+  to: [{}],
+  durations: ['1s']
 };
 const ZoomOut = {
   from: {},
   to: [{
     transform: 'scale(0)'
-  }]
+  }],
+  durations: ['1s']
 }; // Bounce Animations
 
 const BounceIn = {
   from: {
-    transform: 'scale(0)'
+    transform: 'scale(0.8)',
+    opacity: 0
   },
   to: [{
-    transform: 'scale(1.15)'
+    transform: 'scale(1.2)',
+    opacity: 1
+  }, {
+    transform: 'scale(0.9)'
+  }, {
+    transform: 'scale(1.05)'
+  }, {
+    transform: 'scale(0.975)'
   }, {
     transform: 'scale(1)'
-  }]
+  }],
+  durations: ['250ms']
 };
 const BounceOut = {
   from: {
     transform: 'scale(1)'
   },
   to: [{
-    transform: 'scale(1.15)'
+    transform: 'scale(1.2)'
   }, {
-    transform: 'scale(0)'
-  }]
+    transform: 'scale(0.8)',
+    opacity: 0
+  }],
+  durations: ['250ms']
 }; // Other
 
 const FancyPopIn = {
@@ -183,7 +217,8 @@ const FancyPopIn = {
     transform: 'rotate(-5deg) scale(1)'
   }, {
     transform: 'rotate(0deg)'
-  }]
+  }],
+  durations: ['1s']
 };
 
 export { Animate, BounceIn, BounceOut, FadeIn, FadeOut, FancyPopIn, SlideInDown, SlideInLeft, SlideInRight, SlideInTop, SlideOutDown, SlideOutLeft, SlideOutRight, SlideOutTop, ZoomIn, ZoomOut };

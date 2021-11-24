@@ -1,7 +1,5 @@
 # Abstract
-As the name indicates, the package seeks to make it easier for ReactJS developers to define and create their own animations.
-
-> The package does not contain animated components or already written animations. However, It might be added in new versions.
+As the name indicates, the package seeks to make it easier for ReactJS developers to define and create their own animations. This objective is achieved, by giving devs the ability to design there own animations, just by using js-css objects in defining animation stages.
 
 # Installing
 ```
@@ -36,11 +34,28 @@ to={[
 ```
 
 ### Other props (OPTIONAL)
-- ```style: js-object```
-for the general style of all stages.<br>
-- ```duration: string``` the duration of changing the state of the div from stage to another. take the values '1s', '2s'...etc.<br>
+- ```style: js-css object``` for the general style of all stages.<br>
+- ```durations: string[]``` the durations between stages, its default value ['1s'].```. <br>
 - ```delay: int``` specifies the delay time in milliseconds.<br>
 - ```loop: boolen``` to indicate wheather the animation loops forever or not.
+
+## Using 'durations' Prop
+This is an optional prop, whose only purpose is to descripe the duration between each stage and the one preceeding, starting from the first stage in "to" prop. The durations list length should be as the length of "to" list. If it's not, then the first value of the durations list is considered as the duration between each stage and the another.
+
+### Example
+```js
+<Animate 
+from={{backgroundColor: '#f00'}} 
+to={[
+    {backgroundColor: '#0f0'},
+    {backgroundColor: '#00f'},
+    {backgroundColor: '#f0f'},
+    {backgroundColor: '#fff'},
+]}
+durations={['250ms', '500ms', '750ms', '1s']}>
+    Hello, World!
+</Animate>
+```
 
 ## Using Pre-defined Animations
 ```js
@@ -48,7 +63,8 @@ import { Animate, FancyPopIn } from 'react-animation-maker'
 
 <Animate 
 from={FancyPopIn.from} 
-to={FancyPopIn.to}>
+to={FancyPopIn.to}
+durations={FancyPopIn.durations}>
     Hello, World!
 </Animate>
 ```
