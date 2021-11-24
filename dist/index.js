@@ -152,45 +152,44 @@ const SlideOutLeft = {
 
 const ZoomIn = {
   from: {
-    scale: 0
+    transform: 'scale(0)'
   },
   to: [{}]
 };
 const ZoomOut = {
   from: {},
   to: [{
-    scale: 0
+    transform: 'scale(0)'
   }]
 }; // Bounce Animations
 
 const BounceIn = {
   from: {
-    scale: '0'
+    transform: 'scale(0)'
   },
   to: [{
-    scale: '1.15'
+    transform: 'scale(1.15)'
   }, {
-    scale: '1'
+    transform: 'scale(1)'
   }]
 };
 const BounceOut = {
   from: {
-    scale: '1'
+    transform: 'scale(1)'
   },
   to: [{
-    scale: '1.2'
+    transform: 'scale(1.15)'
   }, {
-    scale: '0'
+    transform: 'scale(0)'
   }]
 }; // Other
 
 const FancyPopIn = {
   from: {
-    transform: 'rotate(20deg)',
-    scale: 0
+    transform: 'rotate(20deg) scale(0)'
   },
   to: [{
-    transform: 'rotate(-5deg)'
+    transform: 'rotate(-5deg) scale(1)'
   }, {
     transform: 'rotate(0deg)'
   }]
