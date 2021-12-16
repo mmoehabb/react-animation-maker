@@ -71,3 +71,47 @@ durations={FancyPopIn.durations}>
 
 Checkout the whole list here:
 [https://mahmoud-ehab.github.io/react-animation-maker](https://mahmoud-ehab.github.io/react-animation-maker)
+
+## Using useAnimate Hook
+Another way to use Animate Component is using it through useAnimate Hook. This gives you the ability to rename your Animate Components and consequently increase the readibilty of your code. What makes it more powerful, that it allows you to change the animation of the component using event handlers.
+
+```js
+import { useAnimate, FadeIn, FadeOut } from 'react-animation-maker'
+
+const App = () => {
+    const [Anim, setAnim] = useAnimate(FadeIn);
+
+    return (
+        <div>
+            <Anim>
+                Hello, World!
+            </Anim>
+            <button onClick={() => setAnim(FadeOut)}>
+                Change Anim
+            </button>
+        </div>
+    );
+}
+```
+
+Notice that setAnim in the above example; just takes a props object,
+hence you can do the following, as well...
+
+```js
+import { useAnimate, FadeIn } from 'react-animation-maker'
+
+const App = () => {
+    const [Anim, setAnim] = useAnimate(FadeIn);
+
+    return (
+        <div>
+            <Anim>
+                Hello, World!
+            </Anim>
+            <button onClick={() => setAnim({from: {}, to: {[{opacity: 0}]})}>
+                Change Anim
+            </button>
+        </div>
+    );
+}
+```

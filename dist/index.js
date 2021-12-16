@@ -28,7 +28,7 @@ const Animate = props => {
 
   const updateStyle = () => {
     function update_func() {
-      const durs = props.durations.map(dur => durFromString(dur));
+      const durs = props.durations ? props.durations.map(dur => durFromString(dur)) : [1000];
       let dur = 0;
 
       for (let i = 0; i < props.to.length; i++) {

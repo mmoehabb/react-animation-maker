@@ -72,3 +72,38 @@ Animate.propTypes = {
     durations: PropTypes.arrayOf(PropTypes.string),
     loop: PropTypes.bool,
 };
+
+// useAnimate Hook
+export const useAnimate = initProps => {
+    const AnimateWrapper = rprops => (
+        <Animate
+        from={initProps.from}
+        to={initProps.to}
+        durations={initProps.durations}
+        style={rprops.style || {}}
+        delay={rprops.delay || 0}>
+
+            {rprops.children}
+            
+        </Animate>
+    );
+    const [animate, setAnimate] = useState(() => AnimateWrapper);
+    
+    const hookSetter = props => {
+        const AnimateWrapper = rprops => (
+            <Animate
+            from={props.from}
+            to={props.to}
+            durations={props.durations}
+            style={rprops.style || {}}
+            delay={rprops.delay || 0}>
+
+                {rprops.children}
+
+            </Animate>
+        );
+        setAnimate(() => AnimateWrapper);
+    }
+
+    return [animate, hookSetter];
+}
