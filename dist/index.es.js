@@ -67,6 +67,32 @@ Animate.propTypes = {
   delay: PropTypes.number,
   durations: PropTypes.arrayOf(PropTypes.string),
   loop: PropTypes.bool
+}; // useAnimate Hook
+
+const useAnimate = initProps => {
+  const AnimateWrapper = rprops => /*#__PURE__*/React.createElement(Animate, {
+    from: initProps.from,
+    to: initProps.to,
+    durations: initProps.durations,
+    style: rprops.style || {},
+    delay: rprops.delay || 0
+  }, rprops.children);
+
+  const [animate, setAnimate] = useState(() => AnimateWrapper);
+
+  const hookSetter = props => {
+    const AnimateWrapper = rprops => /*#__PURE__*/React.createElement(Animate, {
+      from: props.from,
+      to: props.to,
+      durations: props.durations,
+      style: rprops.style || {},
+      delay: rprops.delay || 0
+    }, rprops.children);
+
+    setAnimate(() => AnimateWrapper);
+  };
+
+  return [animate, hookSetter];
 };
 
 // Fade Animations
@@ -221,4 +247,4 @@ const FancyPopIn = {
   durations: ['1s']
 };
 
-export { Animate, BounceIn, BounceOut, FadeIn, FadeOut, FancyPopIn, SlideInDown, SlideInLeft, SlideInRight, SlideInTop, SlideOutDown, SlideOutLeft, SlideOutRight, SlideOutTop, ZoomIn, ZoomOut };
+export { Animate, BounceIn, BounceOut, FadeIn, FadeOut, FancyPopIn, SlideInDown, SlideInLeft, SlideInRight, SlideInTop, SlideOutDown, SlideOutLeft, SlideOutRight, SlideOutTop, ZoomIn, ZoomOut, useAnimate };

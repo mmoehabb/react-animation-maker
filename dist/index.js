@@ -76,6 +76,32 @@ Animate.propTypes = {
   delay: PropTypes__default["default"].number,
   durations: PropTypes__default["default"].arrayOf(PropTypes__default["default"].string),
   loop: PropTypes__default["default"].bool
+}; // useAnimate Hook
+
+const useAnimate = initProps => {
+  const AnimateWrapper = rprops => /*#__PURE__*/React__default["default"].createElement(Animate, {
+    from: initProps.from,
+    to: initProps.to,
+    durations: initProps.durations,
+    style: rprops.style || {},
+    delay: rprops.delay || 0
+  }, rprops.children);
+
+  const [animate, setAnimate] = React.useState(() => AnimateWrapper);
+
+  const hookSetter = props => {
+    const AnimateWrapper = rprops => /*#__PURE__*/React__default["default"].createElement(Animate, {
+      from: props.from,
+      to: props.to,
+      durations: props.durations,
+      style: rprops.style || {},
+      delay: rprops.delay || 0
+    }, rprops.children);
+
+    setAnimate(() => AnimateWrapper);
+  };
+
+  return [animate, hookSetter];
 };
 
 // Fade Animations
@@ -246,3 +272,4 @@ exports.SlideOutRight = SlideOutRight;
 exports.SlideOutTop = SlideOutTop;
 exports.ZoomIn = ZoomIn;
 exports.ZoomOut = ZoomOut;
+exports.useAnimate = useAnimate;
