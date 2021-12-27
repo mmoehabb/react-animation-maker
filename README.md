@@ -34,10 +34,10 @@ to={[
 ```
 
 ### Other props (OPTIONAL)
-- ```style: js-css object``` for the general style of all stages.<br>
-- ```durations: string[]``` the durations between stages, its default value ['1s'].```. <br>
-- ```delay: int``` specifies the delay time in milliseconds.<br>
-- ```loop: boolen``` to indicate wheather the animation loops forever or not.
+`style: js-css object` for the general style of all stages.
+`durations: string[]` the durations between stages, its default value ['1s'].
+`delay: int` specifies the delay time in milliseconds.
+`loop: boolen` to indicate wheather the animation loops forever or not.
 
 ## Using 'durations' Prop
 This is an optional prop, whose only purpose is to descripe the duration between each stage and the one preceeding, starting from the first stage in "to" prop. The durations list length should be as the length of "to" list. If it's not, then the first value of the durations list is considered as the duration between each stage and the another.
